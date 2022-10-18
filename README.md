@@ -181,7 +181,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - An array of all freets sorted in descending order by date modified
 
-#### `GET /api/freets?author=USERNAME` - Get freets by author
+#### `GET /api/freets/:username?` - Get freets by author
 
 **Returns**
 
@@ -191,6 +191,29 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
+
+#### `GET /api/freets/rating/:freetId?` - Get security rating of a freet
+
+**Returns**
+
+- An object containing the security rating of a Freet, along with flagged content
+
+**Throws**
+
+- `400` if `id` is not given
+- `404` if `id` does not exist
+
+#### `GET /api/freets/:username?` - Get all Freets submitted by a user
+
+**Returns**
+
+- An array containing objects of each Freet that that poses a risk to the user
+
+**Throws**
+
+- `400` if `username` is not given
+- `401` if another user makes this request
+- `404` if `username` does not exist
 
 #### `POST /api/freets` - Create a new freet
 
