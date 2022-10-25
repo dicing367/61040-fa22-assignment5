@@ -454,6 +454,122 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if the freetId is invalid
 - `403` if the user can't remove a downvote
 
+#### `GET /api/tables/:tableId?/users` - Get a table's users
 
+**Returns**
 
-<!-- #### `GET /api/tables/:tableId?/users` - Get a table's users -->
+- A success message
+- An object with a list of all users in the table
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the tableId is invalid
+- `403` if the user is not in the table
+
+#### `GET /api/tables/:tableId?/admin` - Get a table's admin
+
+**Returns**
+
+- A success message
+- An object with information about the admin
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the tableId is invalid
+
+#### `GET /api/tables/:tableId?/mods` - Get a table's moderators
+
+**Returns**
+
+- A success message
+- An object with a list of all moderators in the table
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the tableId is invalid
+
+#### `GET /api/tables/:tableId?/freets` - Get a table's freets
+
+**Returns**
+
+- A success message
+- An object with a list of all freets associated with the table
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the tableId is invalid
+- `403` if the user is not in the table
+
+#### `POST /api/tables` - Create an new table
+
+**Body**
+
+- `tablename` _{string}_ - The table's name
+
+**Returns**
+
+- A success message
+- An object with the created tables's details
+
+**Throws**
+
+- `403` if the user is not logged in
+- `409` if the table name is already in use
+- `400` if table name is in the wrong format
+
+#### `POST /api/tables/:tableId?/freets` - Create a new freet in the table
+
+**Body**
+
+- `content` _{string}_ - The content of the freet
+
+**Returns**
+
+- A success message
+- A object with the created freet
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the freet content is empty or a stream of empty spaces
+- `413` if the freet content is more than 140 characters long
+- `403` if the user is not in the table
+
+#### `DELETE /api/tables/:tableId?/:freetId?` - Delete an existing freet in the table
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `403` if the user is not the author of the freet
+- `404` if the freetId is invalid
+- `404` if the tableId is invalid
+- `403` if the user is not in the table
+
+#### `PUT /api/tables/:tableId?/:freetId?` - Update an existing freet in the table
+
+**Body**
+
+- `content` _{string}_ - The new content of the freet
+
+**Returns**
+
+- A success message
+- An object with the updated freet
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `404` if the tableId is invalid
+- `403` if the user is not the author of the freet
+- `400` if the new freet content is empty or a stream of empty spaces
+- `413` if the new freet content is more than 140 characters long
+- `403` if the user is not in the table
