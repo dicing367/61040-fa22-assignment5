@@ -12,8 +12,8 @@ import type {User} from '../user/model';
 
 export type Rating = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  user: User;
-  freet: Freet;
+  userId: User;
+  freetId: Freet;
   warnings: Array<[string, string]>;
 };
 
@@ -22,14 +22,14 @@ export type Rating = {
 // type given by the type property, inside MongoDB
 const RatingSchema = new Schema({
   // The user
-  user: {
+  userId: {
     // Use Types.ObjectId outside of the schema
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
   // The user's freet
-  freet: {
+  freetId: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Freet'
