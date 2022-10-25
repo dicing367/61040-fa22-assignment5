@@ -181,7 +181,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - An array of all freets sorted in descending order by date modified
 
-#### `GET /api/freets/:username?` - Get freets by author
+#### `GET /api/freets?author=USERNAME` - Get freets by author
 
 **Returns**
 
@@ -192,28 +192,41 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
 
-#### `GET /api/freets/rating/:freetId?` - Get security rating of a freet
+#### `GET /api/freets/:freetId?` - Get an existing freet
 
 **Returns**
 
-- An object containing the security rating of a Freet, along with flagged content
+- A success message
+- An object with the freet content
 
 **Throws**
 
-- `400` if `id` is not given
-- `404` if `id` does not exist
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
 
-#### `GET /api/freets/:username?` - Get all Freets submitted by a user
+#### `GET /api/freets/:freetId?/upvotes` - Get an existing freet's upvote count
 
 **Returns**
 
-- An array containing objects of each Freet that that poses a risk to the user
+- A success message
+- An object with the freet content and upvote count
 
 **Throws**
 
-- `400` if `username` is not given
-- `401` if another user makes this request
-- `404` if `username` does not exist
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `GET /api/freets/:freetId?/downvotes` - Get an existing freet's downvote count
+
+**Returns**
+
+- A success message
+- An object with the freet content and downvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
 
 #### `POST /api/freets` - Create a new freet
 
@@ -336,3 +349,111 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+#### `GET /api/doxxshield?author=USERNAME/summary` - Get security summary for user
+
+**Returns**
+
+- An array of objects containing their freets created by user with username `author` and their corresponding ratings 
+
+**Throws**
+
+- `400` if `author` is not given
+- `404` if `author` is not a recognized username of any user
+- `403` if the user is not logged in
+- `403` if the user is not the author
+
+#### `GET /api/doxxshield/:freetId?/rating` - Get an existing freet's rating
+
+**Returns**
+
+- A success message
+- An object with the freet content, rating, and compromised info.
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user is not the author of the freet
+
+#### `GET /api/vote/upvoted?author=USERNAME` - Get all upvoted freets for a user
+
+**Returns**
+
+- An array of objects containing their freets upvoted by user with username `author`
+
+**Throws**
+
+- `400` if `author` is not given
+- `404` if `author` is not a recognized username of any user
+- `403` if the user is not logged in
+- `403` if the user is not the author
+
+#### `GET /api/vote/downvoted?author=USERNAME` - Get all downvoted freets for a user
+
+**Returns**
+
+- An array of objects containing their freets downvoted by user with username `author`
+
+**Throws**
+
+- `400` if `author` is not given
+- `404` if `author` is not a recognized username of any user
+- `403` if the user is not logged in
+- `403` if the user is not the author
+
+#### `POST /api/vote/:freetId?/upvote` - upvote an existing freet
+
+**Returns**
+
+- A success message
+- An object with the freet and upvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user has already upvoted the tweet
+
+#### `POST /api/vote/:freetId?/downvote` - downvote an existing freet
+
+**Returns**
+
+- A success message
+- An object with the freet and downvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user has already downvoted the tweet
+
+#### `DELETE /api/vote/:freetId?/upvote` - Remove upvote from freet
+
+**Returns**
+
+- A success message
+- An object with the freet and upvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user can't remove a upvote
+
+#### `DELETE /api/vote/:freetId?/downvote` - Remove downvote from freet
+
+**Returns**
+
+- A success message
+- An object with the freet and downvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user can't remove a downvote
+
+
+
+<!-- #### `GET /api/tables/:tableId?/users` - Get a table's users -->
