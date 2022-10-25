@@ -204,30 +204,6 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if the freetId is invalid
 
-#### `GET /api/freets/:freetId?/upvotes` - Get an existing freet's upvote count
-
-**Returns**
-
-- A success message
-- An object with the freet content and upvote count
-
-**Throws**
-
-- `403` if the user is not logged in
-- `404` if the freetId is invalid
-
-#### `GET /api/freets/:freetId?/downvotes` - Get an existing freet's downvote count
-
-**Returns**
-
-- A success message
-- An object with the freet content and downvote count
-
-**Throws**
-
-- `403` if the user is not logged in
-- `404` if the freetId is invalid
-
 #### `POST /api/freets` - Create a new freet
 
 **Body**
@@ -401,6 +377,30 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if `author` is not a recognized username of any user
 - `403` if the user is not logged in
 - `403` if the user is not the author
+
+#### `GET /api/vote/:freetId?/upvotes` - Get an existing freet's upvote count
+
+**Returns**
+
+- A success message
+- An object with the freet content and upvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+
+#### `GET /api/vote/:freetId?/downvotes` - Get an existing freet's downvote count
+
+**Returns**
+
+- A success message
+- An object with the freet content and downvote count
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
 
 #### `POST /api/vote/:freetId?/upvote` - upvote an existing freet
 
