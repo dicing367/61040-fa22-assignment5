@@ -8,8 +8,8 @@ import type {Freet} from '../freet/model';
  * This file contains a class with functionality to interact with tables stored
  * in MongoDB. Feel free to add additional operations in this file.
  *
- * Note: HydratedDocument<User> is the output of the TableModel() constructor,
- * and contains all the information in User. https://mongoosejs.com/docs/typescript.html
+ * Note: HydratedDocument<Rating> is the output of the TableModel() constructor,
+ * and contains all the information in Rating. https://mongoosejs.com/docs/typescript.html
  */
 class TableCollection {
   /**
