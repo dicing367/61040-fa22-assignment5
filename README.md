@@ -326,18 +326,18 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
-#### `GET /api/doxxshield?author=USERNAME/summary` - Get security summary for user
+#### `GET /api/doxxshield?username=USERNAME/summary` - Get security summary for user
 
 **Returns**
 
-- An array of objects containing their freets created by user with username `author` and their corresponding ratings 
+- An array of objects containing their freets created by user with username `username` and their corresponding ratings 
 
 **Throws**
 
-- `400` if `author` is not given
-- `404` if `author` is not a recognized username of any user
+- `400` if `username` is not given
+- `404` if `username` is not a recognized username of any user
 - `403` if the user is not logged in
-- `403` if the user is not the author
+- `403` if the username is not the user
 
 #### `GET /api/doxxshield/:freetId?/rating` - Get an existing freet's rating
 
