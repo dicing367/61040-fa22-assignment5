@@ -72,6 +72,19 @@ class RatingCollection {
     const rating = await RatingModel.deleteOne({_id: ratingId});
     return rating !== null;
   }
+
+  /**
+   * Find all ratings by userId
+   * `GET /api/doxxshield?author=USERNAME/summary`
+   *
+   * @param {string} username - User for which the summary is generated
+   * @return {Promise<HydratedDocument<Rating>[]> | Promise<null>} - The user with the given username, if any
+   */
+   static async findAllByUsername(username: Types.ObjectId | string): Promise<HydratedDocument<Rating>[]> {
+    return RatingModel.find({userId: username});
+  }
+
+  
 }
 
 export default RatingCollection;
