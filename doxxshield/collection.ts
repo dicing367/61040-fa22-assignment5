@@ -50,9 +50,6 @@ class RatingCollection {
    */
   static async updateOne(freetId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Rating>> {
     const rating = await RatingModel.findOne({freetId: freetId});
-    // if (userDetails.password) {
-    //   user.password = userDetails.password as string;
-    // }
 
     // TODO: implement content checker
 
