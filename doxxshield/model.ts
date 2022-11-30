@@ -12,7 +12,7 @@ import type {User} from '../user/model';
 
 export type Rating = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  userId: User;
+  userId: Types.ObjectId;
   freetId: Freet;
   warnings: Array<[string, string]>;
 };
