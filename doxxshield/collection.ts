@@ -25,8 +25,9 @@ class RatingCollection {
       const rating = new RatingModel({
         authorId,
         freetId,
-        warnings: new Array<[string, string]> // implement this fully later
+        warnings: new Array<[string, string]> // TODO: implement warnings
         });
+      // TODO: implement content checker
       await rating.save(); // Saves rating to MongoDB
       return rating.populate('authorId');
   }
@@ -35,32 +36,30 @@ class RatingCollection {
    * Find a rating by freetId.
    *
    * @param {string} freetId - The freetId of the freet to find
-   * @return {Promise<HydratedDocument<User>> | Promise<null>} - The user with the given username, if any
+   * @return {Promise<HydratedDocument<Rating >> | Promise<null>} - The user with the given username, if any
    */
   static async findOneByFreetId(freetId: Types.ObjectId | string): Promise<HydratedDocument<Rating>> {
     return RatingModel.findOne({freetId: freetId});
   }
 
-  // /**
-  //  * Update user's information
-  //  *
-  //  * @param {string} userId - The userId of the user to update
-  //  * @param {Object} userDetails - An object with the user's updated credentials
-  //  * @return {Promise<HydratedDocument<User>>} - The updated user
-  //  */
-  // static async updateOne(userId: Types.ObjectId | string, userDetails: any): Promise<HydratedDocument<User>> {
-  //   const user = await UserModel.findOne({_id: userId});
-  //   if (userDetails.password) {
-  //     user.password = userDetails.password as string;
-  //   }
+  /**
+   * Update freet's rating (whenever it is edited)
+   *
+   * @param {string} freetId - The freetId of the freet to find
+   * @return {Promise<HydratedDocument<Rating >>} - The updated user
+   */
+  static async updateOne(freetId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Rating>> {
+    const rating = await RatingModel.findOne({freetId: freetId});
+    // if (userDetails.password) {
+    //   user.password = userDetails.password as string;
+    // }
 
-  //   if (userDetails.username) {
-  //     user.username = userDetails.username as string;
-  //   }
+    // TODO: implement content checker
 
-  //   await user.save();
-  //   return user;
-  // }
+    rating.warnings = []; // TODO: implement real warnings
+    await rating.save();
+    return rating.populate('userId');
+  }
 
   /**
    * Delete a rating from the collection.
@@ -83,8 +82,6 @@ class RatingCollection {
    static async findAllByUsername(username: Types.ObjectId | string): Promise<HydratedDocument<Rating>[]> {
     return RatingModel.find({userId: username});
   }
-
-  
 }
 
 export default RatingCollection;
